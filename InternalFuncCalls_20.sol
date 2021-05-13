@@ -1,0 +1,20 @@
+// // SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.6.2 <0.9.0;
+
+contract InfoFeed {
+    function info() public payable returns (uint ret) {
+        return 42;
+    }
+}
+
+contract Consumer {
+    InfoFeed feed;
+    function setFeed(InfoFeed addr) public {
+        feed = addr; 
+    }
+    
+    // throwing some error
+    function callFeed() public payable {
+        feed.info{value: 10, gas: 800}();
+    }
+}
